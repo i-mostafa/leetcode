@@ -24,7 +24,8 @@ var isValid = function (s) {
   }
   return stack.length === 0;
 };
+exports.isValid = isValid;
 
-console.log(isValid("()"));
-console.log(isValid("()[]{}"));
-console.log(isValid("(]"));
+// console.log(isValid("()"));
+// console.log(isValid("()[]{}"));
+// console.log(isValid("(]"));
