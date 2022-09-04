@@ -24,27 +24,48 @@
 //   return max;
 // };
 
+// /**
+//  * @param {string} s
+//  * @return {number}
+//  */
+// var lengthOfLongestSubstring = function (s) {
+//   let max = 0;
+//   let subString = [];
+
+//   for (let i = 0; i < s.length; i++) {
+//     const char = s[i];
+//     const chrIdx = subString.indexOf(char);
+//     if (chrIdx > -1) subString = subString.slice(chrIdx + 1);
+//     subString.push(char);
+//     max = Math.max(max, subString.length);
+//   }
+
+//   return max;
+// };
+
 /**
  * @param {string} s
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
+  const set = new Set();
+  let right = 0,
+    left = 0;
   let max = 0;
-  let subString = [];
-
-  for (let i = 0; i < s.length; i++) {
-    const char = s[i];
-    const chrIdx = subString.indexOf(char);
-    if (chrIdx > -1) subString = subString.slice(chrIdx + 1);
-    subString.push(char);
-    max = Math.max(max, subString.length);
+  while (right < s.length) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
+    }
+    set.add(s[right]);
+    max = Math.max(max, right - left + 1);
+    right++;
   }
-
   return max;
 };
 
-console.log(lengthOfLongestSubstring("abcabcbb"));
-console.log(lengthOfLongestSubstring("bbbbb"));
-console.log(lengthOfLongestSubstring("pwwkew"));
-console.log(lengthOfLongestSubstring("aab"));
-console.log(lengthOfLongestSubstring("dvdf"));
+console.log(lengthOfLongestSubstring("abcabcbb")); //3
+console.log(lengthOfLongestSubstring("bbbbb")); //1
+console.log(lengthOfLongestSubstring("pwwkew")); //3
+console.log(lengthOfLongestSubstring("aab")); //2
+console.log(lengthOfLongestSubstring("dvdf")); //3
